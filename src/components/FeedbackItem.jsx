@@ -1,16 +1,12 @@
-import { useState } from "react"
-
-const FeedbackItem = () => {
-    const [rating, setRating] = useState(7);
-    const [text, setText] = useState("example of a feedback item");
+const FeedbackItem = ({item}) => {
 
     return (
         <div className="card">
             <div className="num-display">
-                {rating}
+                {item.rating}
             </div>
             <div className="text-display">
-               {text}
+               {item.text}
             </div>
 
         </div>
