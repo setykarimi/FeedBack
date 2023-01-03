@@ -1,4 +1,5 @@
-import FeedbackItem from "./FeedbackItem"
+import PropTypes from 'prop-types';
+import FeedbackItem from "./FeedbackItem";
 
 const FeedbackList = ({ feedback }) => {
     console.log(feedback)
@@ -9,6 +10,16 @@ const FeedbackList = ({ feedback }) => {
         <div className="feedback-list">
             {feedback.map((item) => <FeedbackItem key={item.id} item={item} />)}
         </div>
+    )
+}
+
+FeedbackList.protoTypes ={
+    feedback: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            text: PropTypes.number.isRequired,
+            rating: PropTypes.number.isRequired,
+        })
     )
 }
 
