@@ -38,18 +38,19 @@ const FeedbackForm = ({handleAdd}) => {
     return (
         <Card>
             <form onSubmit={handleSubmit}>
-                <h2>How would you rate your service with us</h2>
+                <h2 className="text-center mb-2 text-lg font-bold">How would you rate your service with us?</h2>
                 <RatingSelect select={(rating) => setRating(rating)}/>
-                <div className="input-group">
-                    <input type="text" placeholder="Write a review" onChange={handleTextChange} value={text} a />
-                    <Button type='submit' isDisabled={btnDisabled}>
+                <div className="input-group  border border-1 m-auto mt-4 flex justify-between px-3 py-2 rounded-md gap-4">
+                    <input className="w-full outline-none" type="text" placeholder="Write a review" onChange={handleTextChange} value={text} a />
+                    <Button type='submit' isDisabled={btnDisabled}
+                     classNames='disabled:bg-zinc-200 disabled:text-zinc-500 bg-blue-500 text-white py-1 px-3 rounded-md text-sm font-medium '>
                         Send
                     </Button>
                 </div>
                 
                 {
                     message &&
-                    <div className="message">
+                    <div className="text-sm mt-1 text-red-600 font-medium">
                         {message}
                     </div>
                 }
