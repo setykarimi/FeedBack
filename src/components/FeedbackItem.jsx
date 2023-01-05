@@ -4,18 +4,16 @@ import Card from "./shared/Card";
 
 const FeedbackItem = ({ item, handleDelete }) => {
 
-    
-
     return (
         <Card reverse={true}>
-            <div className="num-display">
+            <div className="absolute flex justify-center items-center text-white -top-3 w-8 h-8 bg-orange-500 -left-3 rounded-full">
                 {item.rating}
             </div>
-            <button onClick={() => handleDelete(item.id)} className='close'>
-                <FaTimes color='purple' />
+            <button onClick={() => handleDelete(item.id)} className='close absolute right-2 top-2 text-sm'>
+                <FaTimes color='gray'/>
             </button>
-            <div className="text-display">
-                {item.text}
+            <div className="text-display px-3">
+                <p>{item.text}</p>
             </div>
         </Card>
     )
