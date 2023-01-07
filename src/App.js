@@ -6,6 +6,8 @@ import Header from './components/Header';
 import FeedbackData from './data/FeedbackData';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -25,9 +27,19 @@ function App() {
     <>
       <Header />
       <div className="App text-white w-fit mx-auto p-5 md:w-1/2 xl:w-1/3">
-        <FeedbackForm handleAdd={addFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' end element={
+              <>
+                <FeedbackForm handleAdd={addFeedback} />
+                <FeedbackStats feedback={feedback} />
+                <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+              </>
+            } />
+
+            <Route path='/about-us' element={<AboutPage />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
   );
