@@ -8,6 +8,7 @@ import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
+import AboutIconLink from './components/AboutIconLink';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -26,9 +27,10 @@ function App() {
   return (
     <>
       <Header />
-      <div className="App text-white w-fit mx-auto p-5 md:w-1/2 xl:w-1/3">
+      <div className="App text-white w-fit h-screen mx-auto p-5 md:w-1/2 xl:w-1/3">
         <BrowserRouter>
           <Routes>
+
             <Route path='/' end element={
               <>
                 <FeedbackForm handleAdd={addFeedback} />
@@ -39,6 +41,7 @@ function App() {
 
             <Route path='/about-us' element={<AboutPage />} />
           </Routes>
+          <AboutIconLink />
         </BrowserRouter>
       </div>
     </>
