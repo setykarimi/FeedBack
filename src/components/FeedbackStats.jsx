@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
+import {useFeedback} from '../context/FeedbackContext';
 
-const FeedbackStats = ({ feedback }) => {
+const FeedbackStats = () => {
+
+    const {feedback} = useFeedback()
     // Calculate rating avg
     let average = feedback.reduce((acc, cur) => {
         return acc + cur.rating
