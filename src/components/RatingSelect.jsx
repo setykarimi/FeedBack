@@ -1,8 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useFeedback } from "../context/FeedbackContext";
 
 const RatingSelect = ({ select }) => {
     const [selected, setSelected] = useState(10);
+    const {feedbackEdit} = useFeedback();
+
     const inputClassName = 'form-check-input appearance-none rounded-full h-10 w-10 border border-gray-300 bg-white checked:bg-orange-400 checked:border-orange-500 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer'
+
+    useEffect(() => {
+        setSelected(feedbackEdit.item.rating)
+    },[feedbackEdit])
 
     const handleChange = (e) => {
         setSelected(+ e.currentTarget.value)
