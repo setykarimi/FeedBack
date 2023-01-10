@@ -1,11 +1,11 @@
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaEdit } from 'react-icons/fa'
 import PropTypes from 'prop-types';
 import Card from "./shared/Card";
 import { useFeedback } from '../context/FeedbackContext';
 
 const FeedbackItem = ({ item }) => {
 
-    const {deleteFeedback} = useFeedback()
+    const {deleteFeedback, editFeedback} = useFeedback()
 
     return (
         <Card reverse={true}>
@@ -14,6 +14,9 @@ const FeedbackItem = ({ item }) => {
             </div>
             <button onClick={() => deleteFeedback(item.id)} className='close absolute right-2 top-2 text-sm'>
                 <FaTimes color='gray'/>
+            </button>
+            <button onClick={() => editFeedback(item)} className='close absolute right-6 top-2 text-sm'>
+                <FaEdit color='red'/>
             </button>
             <div className="text-display px-3">
                 <p>{item.text}</p>
