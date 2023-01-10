@@ -9,24 +9,24 @@ const FeedbackForm = () => {
     const [rating, setRating] = useState(10);
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [message, setMessage] = useState('');
-    const {addFeedback, feedbackEdit} = useFeedback();
+    const { addFeedback, feedbackEdit, updateFeedback } = useFeedback();
 
 
     useEffect(() => {
-        if(feedbackEdit.edit === true){
+        if (feedbackEdit.edit === true) {
             setBtnDisabled(false);
             setText(feedbackEdit.item.text)
             setRating(feedbackEdit.item.rating)
         }
-    },[feedbackEdit])
+    }, [feedbackEdit])
 
     const handleTextChange = (e) => {
-        if(text === ''){
+        if (text === '') {
             setBtnDisabled(true)
             setMessage(null)
-        } else if(text.length !== '' && text.trim().length <= 10){
+        } else if (text.length !== '' && text.trim().length <= 10) {
             setBtnDisabled(true)
-            setMessage('Text must be at least 10 characters')  
+            setMessage('Text must be at least 10 characters')
         } else {
             setMessage(null)
             setBtnDisabled(false)
@@ -36,13 +36,18 @@ const FeedbackForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(text.trim().length > 10){
+        if (text.trim().length > 10) {
             const newFeedback = {
-                text : text,
+                text: text,
                 rating: rating
             }
 
-            addFeedback(newFeedback)
+            if (feedbackEdit.edit === true) {
+                updateFeedback(feedbackEdit.item.id, newFeedback)
+            } else {
+                addFeedback(newFeedback)
+            }
+            
             setText('')
             setBtnDisabled(true)
         }
@@ -53,15 +58,15 @@ const FeedbackForm = () => {
         <Card>
             <form onSubmit={handleSubmit}>
                 <h2 className="text-center mb-2 text-lg font-bold">How would you rate your service with us?</h2>
-                <RatingSelect select={(rating) => setRating(rating)}/>
+                <RatingSelect select={(rating) => setRating(rating)} />
                 <div className="input-group  border border-1 m-auto mt-4 flex justify-between px-3 py-2 rounded-md gap-4">
                     <input className="w-full outline-none" type="text" placeholder="Write a review" onChange={handleTextChange} value={text} a />
                     <Button type='submit' isDisabled={btnDisabled}
-                     classNames='disabled:bg-zinc-200 disabled:text-zinc-500 bg-blue-500 text-white py-1 px-3 rounded-md text-sm font-medium '>
+                        classNames='disabled:bg-zinc-200 disabled:text-zinc-500 bg-blue-500 text-white py-1 px-3 rounded-md text-sm font-medium '>
                         Send
                     </Button>
                 </div>
-                
+
                 {
                     message &&
                     <div className="text-sm mt-1 text-red-600 font-medium">
