@@ -2,13 +2,13 @@ import { useState } from 'react';
 import './App.css';
 import FeedbackList from './components/FeedbackList';
 import Header from './components/Header';
-import FeedbackData from './data/FeedbackData';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import AboutIconLink from './components/AboutIconLink';
 import { FeedbackProvider } from './context/FeedbackContext';
+import HomePage from './pages/HomePage';
 
 function App() {
 
@@ -19,13 +19,7 @@ function App() {
         <BrowserRouter>
           <Routes>
 
-            <Route path='/' end element={
-              <>
-                <FeedbackForm />
-                <FeedbackStats />
-                <FeedbackList />
-              </>
-            } />
+            <Route path='/' element={<HomePage />} />
 
             <Route path='/about-us' element={<AboutPage />} />
           </Routes>
