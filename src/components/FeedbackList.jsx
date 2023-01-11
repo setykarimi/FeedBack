@@ -5,25 +5,28 @@ import { useFeedback } from '../context/FeedbackContext';
 
 const FeedbackList = () => {
 
-   const {feedback} = useFeedback()
+    const { feedback, isLoading } = useFeedback()
 
-    if (!feedback || feedback.length === 0) {
+    if (!isLoading && (!feedback || feedback.length === 0)) {
         return <p>No feedback yet</p>
     }
-    return (
+    return isLoading ? <h3 className='text-center mt-16'>loading ...</h3> : (
+     (
         <div className="feedback-list">
+
             <AnimatePresence>
                 {feedback.map((item) =>
                     <motion.div
                         key={item.id}
-                        initial={{ opacity: 0 , height: '0'}}
-                        animate={{ opacity: 1 , height: 'auto'}}
-                        exit={{ opacity: 0 , height: '0'}}>
-                        <FeedbackItem key={item.id} item={item}/>
+                        initial={{ opacity: 0, height: '0' }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: '0' }}>
+                        <FeedbackItem key={item.id} item={item} />
                     </motion.div>)
                 }
             </AnimatePresence>
         </div>
+    )
     )
 }
 
@@ -32,7 +35,7 @@ FeedbackList.protoTypes = {
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             text: PropTypes.string.isRequired,
-            rating: PropTypes.number.isRequired, 
+            rating: PropTypes.number.isRequired,
         })
     )
 }
